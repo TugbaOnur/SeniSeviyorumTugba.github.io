@@ -217,8 +217,8 @@
             // Kaçma alanını genişletmek için sınırları değiştirdik
             const minX = containerRect.left + 30;
             const maxX = containerRect.right - buttonWidth - 30;
-            const minY = containerRect.top - 100; // Buton yukarı da gidebilsin diye üst sınır daha yukarı
-            const maxY = containerRect.bottom - 100; // Alt sınır da biraz daha genişletildi
+            const minY = containerRect.top - 40; // Buton yukarı da gidebilsin diye üst sınır daha yukarı
+            const maxY = containerRect.bottom - 70; // Alt sınır da biraz daha genişletildi
 
             const randomX = Math.max(minX, Math.min(maxX, Math.random() * (maxX - minX)));
             const randomY = Math.max(minY, Math.min(maxY, Math.random() * (maxY - minY)));
