@@ -1,0 +1,235 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuğba♡Onur</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            background-image: url('https://wallpaperaccess.com/full/5927911.gif');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        img {
+            width: 80%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .button {
+            padding: 15px 25px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.1s ease-out;
+            min-width: 120px;
+        }
+
+        .yes-button {
+            background-color: green;
+            color: white;
+        }
+
+        .no-button {
+            background-color: red;
+            color: white;
+            position: relative;
+        }
+
+        .big-message {
+            position: absolute;
+            font-size: 40px;
+            font-weight: bold;
+            color: #ff0000;
+            opacity: 0;
+            animation: showMessage 3s forwards;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes showMessage {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .photo {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 600px) {
+            .button {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+            .message {
+                font-size: 16px;
+            }
+            img {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media1.tenor.com/m/X9pghVUlMvEAAAAC/sad-cat.gif" alt="Üzgün Kedi">
+        <div class="message">Seni çok seviyorum, beni affeder misin?</div>
+        <div class="button-container">
+            <button class="button yes-button">Evet</button>
+            <button class="button no-button">Hayır</button>
+        </div>
+    </div>
+
+    <audio id="background-audio">
+        <source src="https://www.myinstants.com/media/sounds/sad-hamster.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="anime-wow-audio">
+        <source src="https://www.myinstants.com/media/sounds/anime-wow.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="chipi-audio">
+        <source src="https://www.myinstants.com/media/sounds/chipi-chipi-chapa-chapa.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const yesButton = document.querySelector('.yes-button');
+        const noButton = document.querySelector('.no-button');
+        const container = document.querySelector('.container');
+        const sadHamsterAudio = document.getElementById('background-audio');
+        const animeWowAudio = document.getElementById('anime-wow-audio');
+        const chipiAudio = document.getElementById('chipi-audio');
+
+        let firstClick = false;
+
+        // Sayfada herhangi bir tıklama olduğunda sad hamster müziği başlasın
+        window.addEventListener('click', function() {
+            if (!firstClick) {
+                sadHamsterAudio.play();
+                firstClick = true; // İlk tıklamadan sonra sad hamster çalmaya başlar
+            }
+        });
+
+        yesButton.addEventListener('click', function() {
+            // Evet butonuna tıklanınca anime-wow sesini çal
+            animeWowAudio.play(); 
+
+            // Sad hamster müziğini durdur
+            sadHamsterAudio.pause();
+            sadHamsterAudio.currentTime = 0;  // Ses başa sarılacak
+
+            // Mesaj ve animasyon ekle
+            container.innerHTML = '<div class="big-message">SENİ SEVİYORUM ÇİÇEĞİMMM</div>';
+
+            // 3 adet GIF kullanılıyor: Fotoğrafların sırasını tamamen karıştıracağız
+            const photoUrls = [
+                "https://media.tenor.com/O7VXvlDQWbEAAAAj/excited-cat.gif",
+                "https://media.tenor.com/DpstopWV1NgAAAAj/applecatrun.gif",
+                "https://media.tenor.com/JPOhHuokpdYAAAAj/pop-cat.gif"
+            ];
+
+            // Fotoğrafları karıştırma (sadece bir kez yapılacak)
+            const shuffledPhotos = photoUrls.sort(() => Math.random() - 0.5);
+
+            // Fotoğrafları yerleştir
+            for (let i = 0; i < shuffledPhotos.length; i++) {
+                const photo = document.createElement('img');
+                photo.src = shuffledPhotos[i];
+                photo.classList.add('photo');
+
+                // Fotoğrafı sabit bir yere yerleştiriyoruz
+                const photoPositions = [
+                    { left: '10%', top: '10%' },
+                    { left: '50%', top: '10%' },
+                    { left: '30%', top: '60%' }
+                ];
+
+                photo.style.left = photoPositions[i].left;
+                photo.style.top = photoPositions[i].top;
+
+                document.body.appendChild(photo);
+            }
+
+            // Chipi-Chipi sesini çalmadan önce sesin yüklendiğinden emin olalım.
+            chipiAudio.play().catch(error => {
+                console.error("Ses çalma hatası: ", error);
+            });
+        });
+
+        function moveNoButton() {
+            const containerRect = document.querySelector('.container').getBoundingClientRect();
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+
+            // Kaçma alanını genişletmek için sınırları değiştirdik
+            const minX = containerRect.left + 30;
+            const maxX = containerRect.right - buttonWidth - 30;
+            const minY = containerRect.top - 100; // Buton yukarı da gidebilsin diye üst sınır daha yukarı
+            const maxY = containerRect.bottom - 100; // Alt sınır da biraz daha genişletildi
+
+            const randomX = Math.max(minX, Math.min(maxX, Math.random() * (maxX - minX)));
+            const randomY = Math.max(minY, Math.min(maxY, Math.random() * (maxY - minY)));
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+        }
+
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('touchstart', moveNoButton);
+    </script>
+</body>
+</html>
